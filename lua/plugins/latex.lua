@@ -4,7 +4,7 @@ return {
     lazy = false, -- lazy-loading will disable inverse search
     init = function()
       -- VimTeX configuration goes here, e.g.
-      vim.g.vimtex_view_method = "zathura"
+      vim.g.vimtex_view_method = "zathura_simple"
       -- vim.g.vimtex_format_enabled = 1
     end,
   },

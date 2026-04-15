@@ -1,0 +1,6 @@
+require("plugins.colorscheme")
+require("plugins.mini-icons")
+require("plugins.treesitter")
+require("plugins.neotree")
+require("plugins.bufferline")
+require("plugins.lualine")

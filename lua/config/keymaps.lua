@@ -1,112 +1,43 @@
--- Keymaps are automatically loaded on the VeryLazy event
--- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
--- Add any additional keymaps here
-
-local set = vim.keymap.set
-
-set("i", "jk", "<Esc>", { noremap = false })
-set("i", "jj", "<Esc>", { noremap = false })
-
-if vim.g.vscode then
-  -- Explorer
-  set("n", "<leader>e", function()
-    require("vscode").action("workbench.files.action.focusFilesExplorer")
-  end, { noremap = true })
-
-  -- Buffer management
-  set("n", "[b", "<cmd>Tabprevious<cr>", { noremap = true })
-  set("n", "]b", "<cmd>Tabnext<cr>", { noremap = true })
-  set("n", "<S-h>", "<cmd>Tabprevious<cr>", { noremap = true })
-  set("n", "<S-l>", "<cmd>Tabnext<cr>", { noremap = true })
-  set("n", "<leader>bd", "<cmd>Tabclose<cr>", { noremap = true })
-  set("n", "<leader>bo", function()
-    require("vscode").action("workbench.action.closeOtherEditors")
-  end, { noremap = true })
-
-  -- Splits navigation
-  set("n", "<leader>-", function()
-    require("vscode").action("workbench.action.splitEditorDown")
-  end, { noremap = true })
-  set("n", "<leader>|", function()
-    require("vscode").action("workbench.action.splitEditor")
-  end, { noremap = true })
-  set("n", "<C-H>", function()
-    require("vscode").action("workbench.action.navigateLeft")
-  end, { noremap = true })
-  set("n", "<C-J>", function()
-    require("vscode").action("workbench.action.navigateDown")
-  end, { noremap = true })
-  set("n", "<C-K>", function()
-    require("vscode").action("workbench.action.navigateUp")
-  end, { noremap = true })
-  set("n", "<C-L>", function()
-    require("vscode").action("workbench.action.navigateRight")
-  end, { noremap = true })
-
-  -- Diagnostics
-  set("n", "[d", function()
-    require("vscode").action("editor.action.marker.prevInFiles")
-  end, { noremap = true })
-  set("n", "]d", function()
-    require("vscode").action("editor.action.marker.nextInFiles")
-  end, { noremap = true })
-
-  set("n", "<leader>ff", function()
-    require("vscode").action("workbench.action.quickOpen")
-  end, { noremap = true })
-  set("n", "<leader>fn", function()
-    require("vscode").action("welcome.showNewFileEntries")
-  end, { noremap = true })
-  set("n", "<leader>fr", function()
-    require("vscode").action("workbench.action.openRecent")
-  end, { noremap = true })
-  set("n", "<leader>uC", function()
-    require("vscode").action("workbench.action.selectTheme")
-  end, { noremap = true })
-  set("n", "<leader>sC", function()
-    require("vscode").action("workbench.action.showCommands")
-  end, { noremap = true })
-  set("n", "<leader>sg", function()
-    require("vscode").action("workbench.action.findInFiles")
-  end, { noremap = true })
-  set("n", "<leader>fb", function()
-    require("vscode").action("workbench.action.showEditorsInGroup")
-  end, { noremap = true })
-
-  -- git client
-  set("n", "<leader>gg", function()
-    require("vscode").action("workbench.view.scm")
-  end, { noremap = true })
-
-  -- lsp keymaps
-  set("n", "K", function()
-    require("vscode").action("editor.action.showHover")
-  end, { noremap = true })
-  set("n", "gI", function()
-    require("vscode").action("editor.action.goToImplementation")
-  end, { noremap = true })
-  set("n", "gd", function()
-    require("vscode").action("editor.action.revealDefinition")
-  end, { noremap = true })
-  set("n", "gD", function()
-    require("vscode").action("editor.action.revealDeclaration")
-  end, { noremap = true })
-  set("n", "gr", function()
-    require("vscode").action("editor.action.goToReferences")
-  end, { noremap = true })
-  set("n", "gy", function()
-    require("vscode").action("editor.action.goToTypeDefinition")
-  end, { noremap = true })
-  set("n", "<leader>xq", function()
-    require("vscode").action("editor.action.quickFix")
-  end, { noremap = true })
-  set("n", "<leader>cs", function()
-    require("vscode").action("workbench.action.showAllSymbols")
-  end, { noremap = true })
-  set("n", "<leader>cr", function()
-    require("vscode").action("editor.action.rename")
-  end, { noremap = true })
-  set("n", "<leader>cf", function()
-    require("vscode").action("editor.action.formatDocument")
-  end, { noremap = true })
+local map = vim.keymap.set
+local function desc_opts(description)
+  return {
+    desc = description,
+    silent = true,
+    remap = false,
+  }
 end
+
+map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
+map({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
+map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
+map({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
+
+map("n", "<A-j>", "<cmd>execute 'move .+' . v:count1<cr>==", { desc = "Move Down" })
+map("n", "<A-k>", "<cmd>execute 'move .-' . (v:count1 + 1)<cr>==", { desc = "Move Up" })
+map("i", "<A-j>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move Down" })
+map("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move Up" })
+map("v", "<A-j>", ":<C-u>execute \"'<,'>move '>+\" . v:count1<cr>gv=gv", { desc = "Move Down" })
+map("v", "<A-k>", ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", { desc = "Move Up" })
+
+map("i", "jk", "<Esc>", desc_opts("Escape"))
+map("i", "jj", "<Esc>", desc_opts("Escape"))
+
+map("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
+map("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Next Buffer" })
+map("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
+map("n", "]b", "<cmd>bnext<cr>", { desc = "Next Buffer" })
+map("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
+map("n", "<leader>bD", "<cmd>:bd<cr>", { desc = "Delete Buffer and Window" })
+
+map("n", "<leader>-", "<C-w>s", desc_opts("Split Window Below"))
+map("n", "<leader>|", "<C-w>v", desc_opts("Split Window Right"))
+map("n", "<C-h>", "<C-w>h", desc_opts("Move to Left Window"))
+map("n", "<C-j>", "<C-w>j", desc_opts("Move to Down Window"))
+map("n", "<C-k>", "<C-w>k", desc_opts("Move to Up Window"))
+map("n", "<C-l>", "<C-w>l", desc_opts("Move to Right Window"))
+
+map("n", "<leader>qq", "<cmd>qa<cr>", desc_opts("Quit All Files"))
+map("n", "<leader>rr", "<cmd>restart<cr>", desc_opts("Restart Neovim"))
+
+map("x", "<", "<gv")
+map("x", ">", ">gv")

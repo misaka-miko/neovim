@@ -1,7 +1,5 @@
 vim.pack.add({
-  {src ="https://github.com/rafamadriz/friendly-snippets",
-  version = vim.version.range('1'),
-},
+  {src ="https://github.com/rafamadriz/friendly-snippets"},
   "https://github.com/saghen/blink.cmp",
 })
 
@@ -10,6 +8,11 @@ vim.api.nvim_create_autocmd({ "InsertEnter", "CmdlineEnter"}, {
   once = true,
   callback = function ()
     require("blink.cmp").setup({
+      fuzzy = {
+        prebuilt_binaries = {
+          force_version = "v*"
+        }
+      },
       keymap = {
         preset = "default",
       ['<Tab>'] = {

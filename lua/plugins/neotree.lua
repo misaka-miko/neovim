@@ -73,4 +73,9 @@ require("neo-tree").setup({
   },
 })
 
-vim.keymap.set("n", "<leader>e", "<cmd>Neotree toggle<cr>")
+vim.keymap.set("n", "<leader>e", function ()
+  require("neo-tree.command").execute({
+    toggle = true,
+    dir = vim.uv.cwd()
+  })
+end, { desc = "Explorer Neotree (Root Dir)" })

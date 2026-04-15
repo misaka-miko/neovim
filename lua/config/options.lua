@@ -37,6 +37,20 @@ opt.tabstop = 2
 opt.termguicolors = true
 opt.undofile = true
 opt.undolevels = 10000
+opt.wrap = false
+opt.completeopt = "menu,menuone,noselect"
+opt.fillchars = {
+  foldopen = "",
+  foldclose = "",
+  fold = " ",
+  foldsep = " ",
+  diff = "╱",
+  eob = " ",
+}
+opt.foldtext = ""
+opt.ruler = false -- Disable the default ruler
+opt.wildmode = "longest:full,full" -- Command-line completion mode
+opt.winminwidth = 5 -- Minimum window width
 
 require('vim._core.ui2').enable({
   enable = true, -- Whether to enable or disable the UI.

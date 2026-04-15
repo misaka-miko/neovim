@@ -23,7 +23,38 @@ require("window-picker").setup({
 })
 
 require("neo-tree").setup({
-  close_if_last_window = false, -- Close Neo-tree if it is the last window left in the tab
+  event_handlers = {
+    --{
+    --  event = "neo_tree_window_before_open",
+    --  handler = function(args)
+    --    print("neo_tree_window_before_open", vim.inspect(args))
+    --  end
+    --},
+    {
+      event = "neo_tree_window_after_open",
+      handler = function(args)
+        if args.position == "left" or args.position == "right" then
+          vim.cmd("wincmd =")
+        end
+      end
+    },
+    --{
+    --  event = "neo_tree_window_before_close",
+    --  handler = function(args)
+    --    print("neo_tree_window_before_close", vim.inspect(args))
+    --  end
+    --},
+    {
+      event = "neo_tree_window_after_close",
+      handler = function(args)
+        if args.position == "left" or args.position == "right" then
+          vim.cmd("wincmd =")
+        end
+      end
+    }
+  },
+  close_if_last_window = true, -- Close Neo-tree if it is the last window left in the tab
+  popup_border_style = "", -- or "" to use 'winborder' on Neovim v0.11+
   window = {
     mappings = {
       ["l"] = "open",

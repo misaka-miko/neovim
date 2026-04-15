@@ -7,12 +7,14 @@ package.preload["nvim-web-devicons"] = function()
     return package.loaded["nvim-web-devicons"]
 end
 
-require("mini.icons").setup({
-    file = {
-        [".keep"] = { glyph = "󰊢", hl = "MiniIconsGrey" },
-        ["devcontainer.json"] = { glyph = "", hl = "MiniIconsAzure" },
-    },
-    filetype = {
-        dotenv = { glyph = "", hl = "MiniIconsYellow" },
-    },
-})
+-- require("mini.icons").setup({
+--     file = {
+--         [".keep"] = { glyph = "󰊢", hl = "MiniIconsGrey" },
+--         ["devcontainer.json"] = { glyph = "", hl = "MiniIconsAzure" },
+--     },
+--     filetype = {
+--         dotenv = { glyph = "", hl = "MiniIconsYellow" },
+--     },
+-- })
+
+require("mini.icons").setup()

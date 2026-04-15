@@ -96,3 +96,47 @@ vim.api.nvim_create_autocmd('FileType', {
   pattern = { '<filetype>' },
   callback = function() vim.treesitter.start() end,
 })
+
+local root_cache = {}
+
+local find_root = function (buf_id, names)
+  buf_id = buf_id or 0
+  names = names or { '.git', 'Makefile' }
+
+  local path = vim.api.nvim_buf_get_name(buf_id)
+  if path == '' then return end
+  path = vim.fs.dirname(path)
+
+  local res = root_cache[path]
+  if res ~= nil then return res end
+
+  local root_file = vim.fs.find(names, { path = path, upward = true})[1]
+  if root_file == nil then return end
+
+  res = vim.fn.fnamemodify(vim.fs.dirname(root_file), ':p')
+  root_cache[path] = res
+
+  return res
+end
+
+local setup_auto_root = function (names)
+  if vim.fs == nil then
+    vim.notify("`setup_auto_root` requires `vim.fs`")
+    return
+  end
+
+  names = names or { '.git', 'Makefile' }
+
+  vim.o.autochdir = false
+  local set_root = function ()
+    local root = find_root(0, names)
+    if root == nil then return end
+    vim.fn.chdir(root)
+  end
+  local root_augroup = vim.api.nvim_create_augroup("root_dir",{clear= true})
+  vim.api.nvim_create_autocmd("BufEnter", {group = root_augroup, callback = set_root, desc = 'Find root and change current directory'})
+end
+
+local root_files = {".git", "Makefile", "package.json", "go.mod", "lua" }
+
+setup_auto_root(root_files)

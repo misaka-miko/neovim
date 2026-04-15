@@ -12,6 +12,10 @@
       "rev": "6cd7280adead7f586db6fccbd15d2cac7e2188b9",
       "src": "https://github.com/rafamadriz/friendly-snippets"
     },
+    "fzf-lua": {
+      "rev": "6048a5b243c9ee0e72cdc09edb44f996c892e005",
+      "src": "https://github.com/ibhagwan/fzf-lua"
+    },
     "gruvbox.nvim": {
       "rev": "334d5fd49fc8033f26408425366c66c6390c57bb",
       "src": "https://github.com/ellisonleao/gruvbox.nvim"
@@ -22,7 +26,7 @@
     },
     "mini.icons": {
       "rev": "bac6317300e205335df425296570d84322730067",
-      "src": "https://github.com/nvim-mini/mini.icons"
+      "src": "nvim-mini/mini.icons"
     },
     "mini.pairs": {
       "rev": "42387c7fe68fc0b6e95eaf37f1bb76e7bffaa0d9",
@@ -48,6 +52,10 @@
     "plenary.nvim": {
       "rev": "74b06c6c75e4eeb3108ec01852001636d85a932b",
       "src": "https://github.com/nvim-lua/plenary.nvim"
+    },
+    "which-key.nvim": {
+      "rev": "3aab2147e74890957785941f0c1ad87d0a44c15a",
+      "src": "https://github.com/folke/which-key.nvim"
     }
   }
 }

@@ -39,7 +39,13 @@ vim.keymap.set("n", "<leader>bo", function()
       vim.api.nvim_buf_delete(buf, { force = false })
     end
   end
-end, { desc = "Close others" })
+end, { desc = "Close Other Buffers" })
+--
+-- Clear search and stop snippet on escape
+map({ "i", "n", "s" }, "<esc>", function()
+  vim.cmd("noh")
+  return "<esc>"
+end, { expr = true, desc = "Escape and Clear hlsearch" })
 
 map("n", "<leader>-", "<C-w>s", desc_opts("Split Window Below"))
 map("n", "<leader>|", "<C-w>v", desc_opts("Split Window Right"))

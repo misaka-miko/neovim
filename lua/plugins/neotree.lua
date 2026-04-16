@@ -23,6 +23,7 @@ require("window-picker").setup({
 })
 
 require("neo-tree").setup({
+  sources = { "filesystem", "buffers", "git_status", "document_symbols" },
   event_handlers = {
     --{
     --  event = "neo_tree_window_before_open",
@@ -60,6 +61,7 @@ require("neo-tree").setup({
       ["l"] = "open",
       ["h"] = "close_node",
       ["<space>"] = "none",
+      ["<C-r>"] = "none",
       ["Y"] = {
         function(state)
           local node = state.tree:get_node()
@@ -68,7 +70,30 @@ require("neo-tree").setup({
         end,
         desc = "Copy Path to Clipboard",
       },
-      ["P"] = { "toggle_preview", config = { use_float = false } },
+      ["P"] = { "toggle_preview", config = { use_float = true } },
+    },
+  },
+  default_component_configs = {
+    indent = {
+      with_expanders = true, -- if nil and file nesting is enabled, will enable expanders
+      expander_collapsed = "",
+      expander_expanded = "",
+      expander_highlight = "NeoTreeExpander",
+    },
+    git_status = {
+      symbols = {
+        -- Change type
+        added = "", -- or "✚"
+        modified = "", -- or ""
+        deleted = "✖", -- this can only be used in the git_status source
+        renamed = "󰁕", -- this can only be used in the git_status source
+        -- Status type
+        untracked = "",
+        ignored = "",
+        unstaged = "󰄱",
+        staged = "",
+        conflict = "",
+      },
     },
   },
 })
@@ -79,3 +104,25 @@ vim.keymap.set("n", "<leader>e", function()
     dir = vim.uv.cwd(),
   })
 end, { desc = "Explorer Neotree (Root Dir)" })
+
+vim.keymap.set("n", "<leader>ge", function()
+  require("neo-tree.command").execute({
+    source = "git_status",
+    toggle = true,
+  })
+end, { desc = "Git Explorer" })
+
+vim.keymap.set("n", "<leader>be", function()
+  require("neo-tree.command").execute({
+    source = "buffers",
+    toggle = true,
+  })
+end, { desc = "Buffer Explorer" })
+
+vim.keymap.set("n", "<leader>cs", function()
+  require("neo-tree.command").execute({
+    source = "document_symbols",
+    toggle = false,
+    position = "right",
+  })
+end, { desc = "Buffer Explorer" })

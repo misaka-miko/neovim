@@ -1,7 +1,7 @@
 {
   "plugins": {
     "blink.cmp": {
-      "rev": "456d38d1cd3743926f329204c2340f3e7840aad6",
+      "rev": "c573a15a62bd0bfd4006ee0849b24f5404395500",
       "src": "https://github.com/saghen/blink.cmp"
     },
     "bufferline.nvim": {
@@ -21,11 +21,11 @@
       "src": "https://github.com/rafamadriz/friendly-snippets"
     },
     "fzf-lua": {
-      "rev": "6048a5b243c9ee0e72cdc09edb44f996c892e005",
+      "rev": "69b0d5d045cc039e68ba4c82190ce471464226b6",
       "src": "https://github.com/ibhagwan/fzf-lua"
     },
     "gruvbox.nvim": {
-      "rev": "334d5fd49fc8033f26408425366c66c6390c57bb",
+      "rev": "154eb5ff5b96d0641307113fa385eaf0d36d9796",
       "src": "https://github.com/ellisonleao/gruvbox.nvim"
     },
     "lualine.nvim": {
@@ -45,7 +45,7 @@
       "src": "https://github.com/nvim-mini/mini.pairs"
     },
     "neo-tree.nvim": {
-      "rev": "aa3500f7038a32ed4b0b765cd458b9c429062cac",
+      "rev": "84c75e7a7e443586f60508d12fc50f90d9aee14e",
       "src": "https://github.com/nvim-neo-tree/neo-tree.nvim",
       "version": "3.0.0 - 4.0.0"
     },

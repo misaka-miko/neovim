@@ -2,8 +2,8 @@ vim.pack.add({
   "https://github.com/nvim-lua/plenary.nvim",
   "https://github.com/MunifTanjim/nui.nvim",
   {
-    src = 'https://github.com/nvim-neo-tree/neo-tree.nvim',
-    version = vim.version.range('3')
+    src = "https://github.com/nvim-neo-tree/neo-tree.nvim",
+    version = vim.version.range("3"),
   },
   "https://github.com/s1n7ax/nvim-window-picker",
 })
@@ -36,7 +36,7 @@ require("neo-tree").setup({
         if args.position == "left" or args.position == "right" then
           vim.cmd("wincmd =")
         end
-      end
+      end,
     },
     --{
     --  event = "neo_tree_window_before_close",
@@ -50,8 +50,8 @@ require("neo-tree").setup({
         if args.position == "left" or args.position == "right" then
           vim.cmd("wincmd =")
         end
-      end
-    }
+      end,
+    },
   },
   close_if_last_window = true, -- Close Neo-tree if it is the last window left in the tab
   popup_border_style = "", -- or "" to use 'winborder' on Neovim v0.11+
@@ -73,9 +73,9 @@ require("neo-tree").setup({
   },
 })
 
-vim.keymap.set("n", "<leader>e", function ()
+vim.keymap.set("n", "<leader>e", function()
   require("neo-tree.command").execute({
     toggle = true,
-    dir = vim.uv.cwd()
+    dir = vim.uv.cwd(),
   })
 end, { desc = "Explorer Neotree (Root Dir)" })

@@ -8,6 +8,14 @@
       "rev": "655133c3b4c3e5e05ec549b9f8cc2894ac6f51b3",
       "src": "https://github.com/akinsho/bufferline.nvim"
     },
+    "conform.nvim": {
+      "rev": "086a40dc7ed8242c03be9f47fbcee68699cc2395",
+      "src": "https://github.com/stevearc/conform.nvim"
+    },
+    "dashboard-nvim": {
+      "rev": "62a10d9d55132b338dd742afc3c8a2683f3dd426",
+      "src": "https://github.com/nvimdev/dashboard-nvim"
+    },
     "friendly-snippets": {
       "rev": "6cd7280adead7f586db6fccbd15d2cac7e2188b9",
       "src": "https://github.com/rafamadriz/friendly-snippets"
@@ -26,7 +34,7 @@
     },
     "mini.icons": {
       "rev": "bac6317300e205335df425296570d84322730067",
-      "src": "nvim-mini/mini.icons"
+      "src": "https://github.com/nvim-mini/mini.icons"
     },
     "mini.pairs": {
       "rev": "42387c7fe68fc0b6e95eaf37f1bb76e7bffaa0d9",

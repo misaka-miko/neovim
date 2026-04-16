@@ -31,6 +31,15 @@ map("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
 map("n", "]b", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 map("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
 map("n", "<leader>bD", "<cmd>:bd<cr>", { desc = "Delete Buffer and Window" })
+vim.keymap.set("n", "<leader>bo", function()
+  local bufs = vim.api.nvim_list_bufs()
+  local current_buf = vim.api.nvim_get_current_buf()
+  for _, buf in ipairs(bufs) do
+    if buf ~= current_buf and vim.api.nvim_buf_is_valid(buf) and vim.bo[buf].buflisted then
+      vim.api.nvim_buf_delete(buf, { force = false })
+    end
+  end
+end, { desc = "Close others" })
 
 map("n", "<leader>-", "<C-w>s", desc_opts("Split Window Below"))
 map("n", "<leader>|", "<C-w>v", desc_opts("Split Window Right"))

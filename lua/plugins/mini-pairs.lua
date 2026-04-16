@@ -1,5 +1,5 @@
 vim.pack.add({
-  "https://github.com/nvim-mini/mini.pairs"
+  "https://github.com/nvim-mini/mini.pairs",
 })
 
 local opts = {
@@ -13,4 +13,11 @@ local opts = {
   markdown = true,
 }
 
-require("mini.pairs").setup(opts)
+vim.api.nvim_create_autocmd("InsertEnter", {
+  group = vim.api.nvim_create_augroup("SurroundLazy", { clear = true }),
+  desc = "Lazy loading mini surround",
+  once = true,
+  callback = function()
+    require("mini.pairs").setup(opts)
+  end,
+})

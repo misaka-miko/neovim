@@ -6,7 +6,7 @@ require("fzf-lua").setup({
   winopts = {
     width = 0.90,
     height = 0.85,
-    row = 0.35,
+    row = 0.55,
     col = 0.50,
     border = "rounded",
     backdrop = 60,
@@ -51,12 +51,13 @@ local map = vim.keymap.set
 map("n", "<leader>ff", "<cmd>FzfLua files<cr>", { desc = "Find Files (root dir)" })
 map("n", "<leader><space>", "<cmd>FzfLua files<cr>", { desc = "Find Files (root dir)" })
 map("n", "<leader>fr", "<cmd>FzfLua oldfiles<cr>", { desc = "Find Recent Files" })
-map("n", "<leader>fR", "<cmd>FzfLua oldfiles cwd_only<cr>", { desc = "Find Recent Files (cwd)" })
+map("n", "<leader>fR", "<cmd>lua FzfLua.oldfiles( {cwd = vim.uv.cwd() } )<cr>", { desc = "Find Recent Files (cwd)" })
 map("n", "<leader>fb", "<cmd>FzfLua buffers sort_mru=true sort_lastused=true<cr>", { desc = "Buffers" })
 map("n", "<leader>fw", "<cmd>FzfLua live_grep<cr>", { desc = "Live Grep (root dir)" })
 map("n", "<leader>/", "<cmd>FzfLua live_grep<cr>", { desc = "Live Grep (root dir)" })
 map("n", "<leader>fB", "<cmd>FzfLua buffers<cr>", { desc = "Buffers (all)" })
 map("n", "<leader>fg", "<cmd>FzfLua git_files<cr>", { desc = "Find Files (git files)" })
+map("n", "<leader>fc", "<cmd>lua FzfLua.files({ cwd = '~/.config/nvim' })<cr>", { desc = "Find Config Files" })
 
 map("n", "<leader>sb", "<cmd>FzfLua lines<cr>", { desc = "Buffer Lines" })
 map("n", "<leader>sa", "<cmd>FzfLua autocmds<cr>", { desc = "Auto Commands" })

@@ -3,6 +3,48 @@ vim.pack.add({
 })
 
 require("fzf-lua").setup({
+  winopts = {
+    width = 0.90,
+    height = 0.85,
+    row = 0.35,
+    col = 0.50,
+    border = "rounded",
+    backdrop = 60,
+    preview = {
+      layout = "flex",
+      horizontal = "right:55%",
+      vertical = "down:45%",
+      flip_columns = 120,
+      border = "rounded",
+      scrollbar = "float",
+      title = true,
+      title_pos = "center",
+      delay = 20,
+      winopts = {
+        number = true,
+        cursorline = true,
+        cursorlineopt = "both",
+        signcolumn = "no",
+      },
+    },
+  },
+  fzf_opts = {
+    ["--layout"] = "reverse",
+    ["--info"] = "inline-right",
+    ["--highlight-line"] = true,
+  },
+  keymap = {
+    builtin = {
+      ["<C-f>"] = "preview-page-down",
+      ["<C-b>"] = "preview-page-up",
+    },
+    fzf = {
+      ["ctrl-d"] = "half-page-down",
+      ["ctrl-u"] = "half-page-up",
+      ["ctrl-f"] = "preview-page-down",
+      ["ctrl-b"] = "preview-page-up",
+    },
+  },
   fzf_colors = true,
 })
 local map = vim.keymap.set

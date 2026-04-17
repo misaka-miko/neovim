@@ -5,25 +5,14 @@ vim.pack.add({
     src = "https://github.com/nvim-neo-tree/neo-tree.nvim",
     version = vim.version.range("3"),
   },
-  "https://github.com/s1n7ax/nvim-window-picker",
-})
-
-require("window-picker").setup({
-  filter_rules = {
-    include_current_win = false,
-    autoselect_one = true,
-    -- filter using buffer options
-    bo = {
-      -- if the file type is one of following, the window will be ignored
-      filetype = { "neo-tree", "neo-tree-popup", "notify" },
-      -- if the buffer type is one of following, the window will be ignored
-      buftype = { "terminal", "quickfix" },
-    },
-  },
 })
 
 require("neo-tree").setup({
   sources = { "filesystem", "buffers", "git_status", "document_symbols" },
+  source_selector = {
+    winbar = true,
+    statusline = false,
+  },
   event_handlers = {
     --{
     --  event = "neo_tree_window_before_open",
@@ -58,6 +47,15 @@ require("neo-tree").setup({
   popup_border_style = "", -- or "" to use 'winborder' on Neovim v0.11+
   window = {
     mappings = {
+      ["e"] = function()
+        vim.cmd("Neotree focus filesystem left")
+      end,
+      ["b"] = function()
+        vim.cmd("Neotree focus buffers left")
+      end,
+      ["g"] = function()
+        vim.cmd("Neotree focus git_status left")
+      end,
       ["l"] = "open",
       ["h"] = "close_node",
       ["<space>"] = "none",

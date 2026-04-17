@@ -5,12 +5,17 @@ vim.pack.add({
 require("bufferline").setup({
   options = {
     always_show_bufferline = false,
+    diagnostics = "nvim_lsp",
+    diagnostics_indicator = function(count, level)
+      local icon = level:match("error") and " " or " "
+      return " " .. icon .. count
+    end,
     offsets = {
       {
         filetype = "neo-tree",
-        text = "Neo-tree",
+        text = " Neo-tree",
         highlight = "Directory",
-        text_align = "left",
+        text_align = "center",
       },
     },
   },

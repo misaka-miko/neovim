@@ -13,6 +13,12 @@ vim.api.nvim_create_autocmd({ "InsertEnter", "CmdlineEnter" }, {
           force_version = "v*",
         },
       },
+      completion = {
+        documentation = {
+          auto_show = true,
+          auto_show_delay_ms = 300,
+        },
+      },
       keymap = {
         preset = "default",
         ["<Tab>"] = {

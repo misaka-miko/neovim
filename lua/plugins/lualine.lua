@@ -27,5 +27,5 @@ require("lualine").setup({
       "filetype",
     },
   },
-  extensions = { "fzf", "neo-tree" },
+  extensions = { "fzf" },
 })

@@ -4,69 +4,87 @@ vim.pack.add({
 
 local db = require("dashboard")
 
-db.setup({
-  theme = "hyper",
+local logo = [[
+
+
+  ██████  ███▄ ▄███▓ ██▓ ██▓    ▓█████  ███▄ ▄███▓ ██▓  ██████  ▄▄▄       ██ ▄█▀ ▄▄▄      
+▒██    ▒ ▓██▒▀█▀ ██▒▓██▒▓██▒    ▓█   ▀ ▓██▒▀█▀ ██▒▓██▒▒██    ▒ ▒████▄     ██▄█▒ ▒████▄    
+░ ▓██▄   ▓██    ▓██░▒██▒▒██░    ▒███   ▓██    ▓██░▒██▒░ ▓██▄   ▒██  ▀█▄  ▓███▄░ ▒██  ▀█▄  
+  ▒   ██▒▒██    ▒██ ░██░▒██░    ▒▓█  ▄ ▒██    ▒██ ░██░  ▒   ██▒░██▄▄▄▄██ ▓██ █▄ ░██▄▄▄▄██ 
+▒██████▒▒▒██▒   ░██▒░██░░██████▒░▒████▒▒██▒   ░██▒░██░▒██████▒▒ ▓█   ▓██▒▒██▒ █▄ ▓█   ▓██▒
+▒ ▒▓▒ ▒ ░░ ▒░   ░  ░░▓  ░ ▒░▓  ░░░ ▒░ ░░ ▒░   ░  ░░▓  ▒ ▒▓▒ ▒ ░ ▒▒   ▓▒█░▒ ▒▒ ▓▒ ▒▒   ▓▒█░
+░ ░▒  ░ ░░  ░      ░ ▒ ░░ ░ ▒  ░ ░ ░  ░░  ░      ░ ▒ ░░ ░▒  ░ ░  ▒   ▒▒ ░░ ░▒ ▒░  ▒   ▒▒ ░
+░  ░  ░  ░      ░    ▒ ░  ░ ░      ░   ░      ░    ▒ ░░  ░  ░    ░   ▒   ░ ░░ ░   ░   ▒   
+      ░         ░    ░      ░  ░   ░  ░       ░    ░        ░        ░  ░░  ░         ░  ░
+
+]]
+
+local opts = {
+  theme = "doom",
+  hide = {
+    statusline = false,
+  },
   config = {
-    shortcut = {
+    vertical_center = true,
+    header = vim.split(logo, "\n"),
+    center = {
       {
-        desc = "󰈞 Find Files",
-        group = "DashboardShortCut",
+        action = "lua FzfLua.files()",
+        desc = " Find File",
+        icon = " ",
         key = "f",
-        action = "FzfLua files",
       },
       {
-        desc = "󰈚 Recent Files",
-        group = "DashboardShortCut",
-        key = "r",
-        action = "FzfLua oldfiles",
-      },
-      {
-        desc = "󰭎 New File",
-        group = "DashboardShortCut",
+        action = "ene | startinsert",
+        desc = " New File",
+        icon = " ",
         key = "n",
-        action = "enew",
       },
       {
-        desc = "󰺮 Live Grep",
-        group = "DashboardShortCut",
+        action = "lua FzfLua.oldfiles()",
+        desc = " Recent Files",
+        icon = " ",
+        key = "r",
+      },
+      {
+        action = "lua FzfLua.live_grep()",
+        desc = " Find Text",
+        icon = " ",
         key = "g",
-        action = "FzfLua live_grep",
       },
       {
-        desc = "󰊢 Git Status",
-        group = "DashboardShortCut",
+        action = "lua FzfLua.files({ cwd = '~/.config/nvim'})",
+        desc = " Config",
+        icon = " ",
+        key = "c",
+      },
+      {
+        action = function()
+          require("plugins.persistence").load()
+          require("persistence").load()
+        end,
+        desc = " Restore Session",
+        icon = "󰍲 ",
         key = "s",
-        action = "FzfLua git_status",
       },
       {
-        desc = " Quit",
-        group = "DashboardShortCut",
+        action = function()
+          vim.api.nvim_input("<cmd>qa<cr>")
+        end,
+        desc = " Quit",
+        icon = " ",
         key = "q",
-        action = "qa",
       },
     },
-
-    project = {
-      enable = true,
-      limit = 8,
-      icon = "󰉋 ",
-      label = "Projects",
-      action = "FzfLua files cwd=",
-    },
-    mru = {
-      enable = true,
-      limit = 10,
-      icon = "󰈚 ",
-      label = "Recent",
-      cwd_only = false,
-    },
-
-    week_header = {
-      enable = true,
-    },
-    packages = { enable = true },
     footer = {
       "⚡ Neovim loaded successfully",
     },
   },
-})
+}
+
+for _, button in ipairs(opts.config.center) do
+  button.desc = button.desc .. string.rep(" ", 43 - #button.desc)
+  button.key_format = "  %s"
+end
+
+db.setup(opts)

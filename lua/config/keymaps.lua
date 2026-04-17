@@ -36,6 +36,27 @@ map("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 map("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
 map("n", "]b", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 map("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
+map("n", "<leader>bd", function()
+  local bufnr = vim.api.nvim_get_current_buf()
+
+  if not vim.api.nvim_buf_is_valid(bufnr) or not vim.api.nvim_buf_is_loaded(bufnr) then
+    return
+  end
+
+  local buftype = vim.bo[bufnr].buftype
+  if buftype == "nofile" or buftype == "terminal" then
+    vim.cmd("close")
+    return
+  end
+
+  local listed_bufs = vim.fn.getbufinfo({ buflisted = 1 })
+  if #listed_bufs > 1 then
+    vim.cmd("bp")
+    vim.cmd("bd! " .. bufnr)
+  else
+    vim.cmd("bd!")
+  end
+end, { desc = "Delete Buffer" })
 map("n", "<leader>bD", "<cmd>:bd<cr>", { desc = "Delete Buffer and Window" })
 vim.keymap.set("n", "<leader>bo", function()
   local bufs = vim.api.nvim_list_bufs()

@@ -2,7 +2,7 @@ local M = {}
 
 M.loaded = false
 
-local function load()
+M.load = function()
   if M.loaded then
     return
   end
@@ -26,15 +26,22 @@ local function load()
 end
 
 vim.keymap.set("n", "<leader>qs", function()
-  load()
+  M.load()
   require("persistence").load()
 end, { desc = "Restore Session" })
+
+vim.keymap.set("n", "<leader>qS", function()
+  M.load()
+  require("persistence").select()
+end, { desc = "Select Session" })
+
 vim.keymap.set("n", "<leader>ql", function()
-  load()
+  M.load()
   require("persistence").load({ last = true })
 end, { desc = "Restore Last Session" })
+
 vim.keymap.set("n", "<leader>qd", function()
-  load()
+  M.load()
   require("persistence").stop()
 end, { desc = "Don't Save Current Session" })
 

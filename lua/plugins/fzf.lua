@@ -3,6 +3,7 @@ vim.pack.add({
 })
 
 require("fzf-lua").setup({
+  "default-title",
   winopts = {
     width = 0.90,
     height = 0.85,
@@ -46,6 +47,20 @@ require("fzf-lua").setup({
     },
   },
   fzf_colors = true,
+
+  files = {
+    cwd_prompt = false,
+    actions = {
+      ["alt-i"] = { require("fzf-lua").actions.toggle_ignore },
+      ["alt-h"] = { require("fzf-lua").actions.toggle_hidden },
+    },
+  },
+  grep = {
+    actions = {
+      ["alt-i"] = { require("fzf-lua").actions.toggle_ignore },
+      ["alt-h"] = { require("fzf-lua").actions.toggle_hidden },
+    },
+  },
 })
 local map = vim.keymap.set
 map("n", "<leader>ff", "<cmd>FzfLua files<cr>", { desc = "Find Files (root dir)" })

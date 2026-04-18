@@ -54,4 +54,5 @@ require("gitsigns").setup({
       map("n", "<leader>ghD", function() gs.diffthis("~") end, "Diff This ~")
       map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "GitSigns Select Hunk")
   end,
+  attach_to_untracked = true,
 })

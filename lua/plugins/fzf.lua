@@ -62,6 +62,8 @@ require("fzf-lua").setup({
     },
   },
 })
+require("fzf-lua").register_ui_select()
+
 local map = vim.keymap.set
 map("n", "<leader>ff", "<cmd>FzfLua files<cr>", { desc = "Find Files (root dir)" })
 map("n", "<leader><space>", "<cmd>FzfLua files<cr>", { desc = "Find Files (root dir)" })

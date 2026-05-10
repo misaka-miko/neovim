@@ -35,6 +35,13 @@ local function load()
   })
 
   require("neo-tree").setup({
+    filesystem = {
+      filtered_items = {
+        always_show = {
+          ".gitignore",
+        },
+      },
+    },
     sources = { "filesystem", "buffers", "git_status", "document_symbols" },
     source_selector = {
       winbar = true,

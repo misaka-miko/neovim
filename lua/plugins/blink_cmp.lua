@@ -1,4 +1,5 @@
 vim.pack.add({
+  "https://github.com/saghen/blink.lib",
   { src = "https://github.com/rafamadriz/friendly-snippets" },
   "https://github.com/saghen/blink.cmp",
 })
@@ -7,12 +8,11 @@ vim.api.nvim_create_autocmd({ "InsertEnter", "CmdlineEnter" }, {
   group = vim.api.nvim_create_augroup("nvim_completion_setup", { clear = true }),
   once = true,
   callback = function()
+    pcall(function()
+      require("blink.cmp").build():wait(60000)
+    end)
+
     require("blink.cmp").setup({
-      fuzzy = {
-        prebuilt_binaries = {
-          force_version = "v*",
-        },
-      },
       completion = {
         documentation = {
           auto_show = true,

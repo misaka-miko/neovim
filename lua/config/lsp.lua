@@ -1,6 +1,7 @@
 vim.lsp.enable("lua_ls")
 vim.lsp.enable("clangd")
 vim.lsp.enable("pyright")
+vim.lsp.enable("marksman")
 
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("lsp_attach", { clear = true }),
@@ -62,7 +63,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
       vim.diagnostic.open_float({ source = true })
     end, { buffer = event.buf, desc = "Show Line Diagnostic" })
 
-    if client and client:supports_method("textdocument/foldingrange") then
+    if client and client:supports_method("textDocument/foldingRange") then
       local win = vim.api.nvim_get_current_win()
       vim.wo[win][0].foldexpr = "v:lua.vim.lsp.foldexpr()"
     end

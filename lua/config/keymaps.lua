@@ -81,6 +81,11 @@ map("n", "<C-h>", "<C-w>h", { desc = "Move to Left Window" })
 map("n", "<C-j>", "<C-w>j", { desc = "Move to Lower Window" })
 map("n", "<C-k>", "<C-w>k", { desc = "Move to Upper Window" })
 map("n", "<C-l>", "<C-w>l", { desc = "Move to Right Window" })
+map("n", "<leader>uw", function()
+  vim.wo.wrap = not vim.wo.wrap
+  local status = vim.wo.wrap and "Enabled" or "Disabled"
+  vim.notify("Line Wrap " .. status, vim.log.levels.INFO, { title = "UI" })
+end, { desc = "Toggle Wrap" })
 
 map("n", "<leader>qq", "<cmd>qa<cr>", desc_opts("Quit All Files"))
 map("n", "<leader>rr", "<cmd>restart<cr>", desc_opts("Restart Neovim"))

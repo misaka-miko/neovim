@@ -3,6 +3,7 @@ require("plugins.mini")
 require("plugins.dashboard")
 require("plugins.todo-comments")
 require("plugins.mason")
+require("plugins.markdown")
 
 vim.schedule(function()
   require("plugins.treesitter")
